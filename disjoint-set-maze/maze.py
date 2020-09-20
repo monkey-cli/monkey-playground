@@ -10,6 +10,8 @@ The maze is represented as a matrix of bits, where 0 represents an empty slot an
 # 0 -> empty
 # 1 -> wall
 Find the connected coordinates with value of 0 that connect from start to destination.
+
+To solve the problem we will use the Disjoint Set (Union Find) algorithm.
 """
 maze = [
     [0, 0, 1, 1, 0, 0, 1, 1],
