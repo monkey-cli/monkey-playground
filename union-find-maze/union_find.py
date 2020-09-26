@@ -1,11 +1,19 @@
 
-# returns the root of the connection tree
-# Do not apply "path compression" for root finding
-# because it will interrupt the connected path for the maze solver
+# union find equipped with "path compression"
 def find(data, i):
-    if i != data[i]:
-        data[i] = find(data, data[i])
-    return data[i]
+    root = i
+    # Find the root of the dataset
+    while (root != data[root]):
+        root = data[root]
+
+    # Compress the path leading back to the root.
+    # this operation is called "path compression"
+    while (i != root):
+        next = data[i]
+        data[i] = root
+        i = next
+
+    return root
 
 
 def union(data, i, j):
@@ -20,13 +28,9 @@ def connected(data, i, j):
     return find(data, i) == find(data, j)
 
 
-def find_immediate(data, i):
-    """
-    Find immediate item in the connected data
-    """
-    return data[i]
-
-
+# ------------------------------------------------------------
+# Test data
+# ------------------------------------------------------------
 # n = 10
 # data = [i for i in range(n)]
 
