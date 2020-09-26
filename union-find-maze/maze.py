@@ -30,9 +30,8 @@ maze = [
 
 rows = np.shape(maze)[0]
 columns = np.shape(maze)[1]
-
-start = maze[0][0]
-end = maze[rows-1][columns-1]
+# start = maze[0][0]
+# end = maze[rows-1][columns-1]
 
 # The number of elements in this union find
 size = rows * columns
@@ -53,8 +52,13 @@ for row in range(0, rows):
         data.append(hashIndex)
         hashIndex += 1
 
+# ------------------------------------------------------------------------
+
 
 def find_next_steps(currect_index):
+    """
+    Helper function used only in this file.
+    """
     matrixCoord = hashTable[currect_index]
     possible_next_steps = get_possible_next_steps(maze, hashTable, matrixCoord)
     next_steps = get_non_connected_next_steps(
@@ -63,13 +67,9 @@ def find_next_steps(currect_index):
     return next_steps
 
 
-# print(find(data, 4))
-# print(connected(data, 3, 5))
-
 # ------------------------------------------------------------------------
 # start from the start of the maze and look for the next connection
 currect_index = 0  # index in the data array
-
 # while the start and end of the maze are not connected
 # try to find the next connected item of the path
 steps = []
@@ -88,7 +88,7 @@ while(not connected(data, 0, size-1)):
         Dead end reached. Need to get back and look at previous connections next steps.
         """
         print("Dead end at index:", currect_index,
-              "and value:", hashTable[currect_index])
+              "and coordinate:", hashTable[currect_index])
         prev_step = steps.index(currect_index) - 1
         while(prev_step >= 0 and len(find_next_steps(steps[prev_step])) == 0):
             # go check for a new route starting from one step before the current one
@@ -105,6 +105,15 @@ while(not connected(data, 0, size-1)):
     # get a random item from the array
     next_index = next_steps[randrange(len(next_steps))]
     union(data, currect_index, next_index)
-    print("next index ", next_index)
+    print("Iteration at index", currect_index)
     # prepare for next loop
     currect_index = next_index
+
+print("Iteration at last index", size-1)
+print("--------------------------------------------------------")
+# append last index of the array
+steps.append(size-1)
+
+step_coordinates = list(map(lambda item: hashTable[item], steps))
+print("Iteration traversed the following coordinates:")
+print(step_coordinates)
