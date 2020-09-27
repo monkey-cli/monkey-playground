@@ -13,16 +13,16 @@ def get_surroundings(matrix, coord):
 
     # top
     (coordinates.append((coord[0], coord[1]-1))
-     if coord[1]-1 > 0 else None)
+     if coord[1] - 1 >= 0 else None)
     # bottom
     (coordinates.append((coord[0], coord[1]+1))
-     if coord[1]+1 < height else None)
+     if coord[1] + 1 < height else None)
     # left
     (coordinates.append((coord[0]-1, coord[1]))
-     if coord[0]-1 > 0 else None)
+     if coord[0] - 1 >= 0 else None)
     # right
     (coordinates.append((coord[0]+1, coord[1]))
-     if coord[0]+1 < width else None)
+     if coord[0] + 1 < width else None)
 
     return coordinates
 
