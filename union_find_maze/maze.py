@@ -3,6 +3,7 @@ import numpy as np
 from random import randrange
 from union_find import union, find, connected
 from utils import get_possible_next_steps, get_non_connected_next_steps
+from mock import get_maze
 """
 Task: Try to find the route in the provided maze from origin (0,0) to destination (N-1,M-1).
 N-number of rows, M-number of columns.
@@ -14,20 +15,7 @@ Find the connected coordinates with value of 0 that connect from start to destin
 
 To solve the problem we will use the Disjoint Set (Union Find) algorithm.
 """
-maze = [
-    [0, 0, 1, 1, 0, 0, 1, 1],
-    [1, 0, 1, 0, 0, 1, 1, 0],
-    [0, 0, 0, 0, 1, 0, 1, 1],
-    [1, 1, 1, 0, 1, 1, 0, 0],
-    [0, 0, 1, 0, 0, 1, 1, 1],
-    [1, 0, 1, 1, 0, 0, 0, 1],
-    [0, 0, 0, 1, 1, 1, 0, 1],
-    [1, 1, 1, 1, 0, 0, 0, 1],
-    [0, 1, 1, 1, 0, 1, 1, 0],
-    [1, 0, 0, 1, 0, 0, 0, 1],
-    [0, 1, 0, 1, 1, 0, 0, 0],
-]
-
+maze = get_maze()
 rows = np.shape(maze)[0]
 columns = np.shape(maze)[1]
 # start = maze[0][0]
