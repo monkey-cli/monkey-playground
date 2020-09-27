@@ -45,7 +45,7 @@ for row in range(0, rows):
 
 def find_next_steps(currect_index):
     """
-    Helper function used only in this file.
+    Helper function used to find only the acceptable next steps
     """
     matrixCoord = hashTable[currect_index]
     possible_next_steps = get_possible_next_steps(maze, hashTable, matrixCoord)
@@ -55,7 +55,7 @@ def find_next_steps(currect_index):
     return next_steps
 
 
-def run_union_find(onNextStep = None):
+def run_union_find(onStepUpdate=None):
 
     # ------------------------------------------------------------------------
     # start from the start of the maze and look for the next connection
@@ -79,6 +79,13 @@ def run_union_find(onNextStep = None):
             """
             print("Dead end at index:", currect_index,
                   "and coordinate:", hashTable[currect_index])
+            if onStepUpdate:
+                onStepUpdate(
+                    {
+                        "status": "DEAD_END",
+                        "value": hashTable[currect_index]
+                    }
+                )
             prev_step = steps.index(currect_index) - 1
             while(prev_step >= 0 and len(find_next_steps(steps[prev_step])) == 0):
                 # go check for a new route starting from one step before the current one
@@ -96,6 +103,13 @@ def run_union_find(onNextStep = None):
         next_index = next_steps[randrange(len(next_steps))]
         union(data, currect_index, next_index)
         print("Iteration at index", currect_index)
+        if onStepUpdate:
+            onStepUpdate(
+                {
+                    "status": "NEXT_STEP",
+                    "value": hashTable[currect_index]
+                }
+            )
         # prepare for next loop
         currect_index = next_index
 
