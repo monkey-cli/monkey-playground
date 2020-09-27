@@ -24,7 +24,6 @@
 # https://github.com/keesiemeijer/maze-generator
 # generated maze is with value 1 as route. Need to be inverted for this example.
 # Remove first and last rows as they represend the top and bottom borders
-# For each row also ignore the first and last items since they represent the horizontal borders
 maze20x20 = [
     "10000000001000001000000010000000000010001",
     "11111011101110111010111010111111101010101",
