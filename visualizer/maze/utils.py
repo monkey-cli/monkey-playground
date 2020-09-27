@@ -13,7 +13,7 @@ def draw_graph(num_rows, num_columns, space_from_edge=10):
 
     x = - (width/2 - space_from_edge)
     distanceX = width/columns
-    for ctr in range(columns):
+    for _ in range(columns):
         turtle.penup()
         turtle.goto(x, (height/2))
         turtle.pendown()
@@ -22,7 +22,7 @@ def draw_graph(num_rows, num_columns, space_from_edge=10):
 
     y = (height/2 - space_from_edge)
     distanceY = height/rows
-    for ctr in range(rows):
+    for _ in range(rows):
         turtle.penup()
         turtle.goto((width/2), y)
         turtle.pendown()
