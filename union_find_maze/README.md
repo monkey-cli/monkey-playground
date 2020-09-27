@@ -44,8 +44,9 @@ To run visualizer of the union-find maze solver run `./union_find_maze/main.py`.
 2. yellow - represents the traversed route from start to end.
 3. red - in case of a dead-end. The coordinate will be marked with red.
 ```
-
-![use case](https://user-images.githubusercontent.com/12220208/94370270-54833200-00ef-11eb-918f-c31968519c8e.gif)
+| 10x10 maze | 20x20 maze |
+|-|-|
+|<img src="https://github.com/monkey-cli/monkey-playground/blob/master/assets/union_find_maze/10x10%20maze.gif" width="500" height="auto"/>| <img src="https://github.com/monkey-cli/monkey-playground/blob/master/assets/union_find_maze/20x20%20maze.png" width="500"  height="auto"/>|
 
 The maze creation is responsive to the matrix size and will scale to fil the screen of the running device and the sizes of the matrix boxes will adapt their height according to the screen size and the actual size of the matrix/maze being rendered.
 
