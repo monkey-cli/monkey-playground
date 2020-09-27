@@ -15,6 +15,7 @@ Find the connected coordinates with value of 0 that connect from start to destin
 
 To solve the problem we will use the Disjoint Set (Union Find) algorithm.
 """
+
 maze = get_maze()
 rows = np.shape(maze)[0]
 columns = np.shape(maze)[1]
@@ -55,9 +56,9 @@ def find_next_steps(currect_index):
     return next_steps
 
 
-def run_union_find(onStepUpdate=None):
+# ------------------------------------------------------------------------
 
-    # ------------------------------------------------------------------------
+def run_union_find(onStepUpdate=None):
     # start from the start of the maze and look for the next connection
     currect_index = 0  # index in the data array
     # while the start and end of the maze are not connected
