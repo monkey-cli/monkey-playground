@@ -30,6 +30,17 @@ def draw_graph(num_rows, num_columns, space_from_edge=10):
         y -= distanceY
 
 
+def fill_matrix(maze, matrix_rows, matrix_columns):
+    for row in range(0, matrix_rows):
+        for column in range(0, matrix_columns):
+            if (is_matrix_edge(maze, (row, column))):
+                fill_coordinate((row, column), matrix_rows,
+                                matrix_columns, 'red')
+            if(maze[row][column] == 1):  # fill a wall
+                fill_coordinate((row, column), matrix_rows,
+                                matrix_columns, 'black')
+
+
 def fill_coordinate(coordinate, num_rows, num_columns, fill_color='red', space_from_edge=10):
     turtle.color(fill_color)
     turtle.fillcolor(fill_color)

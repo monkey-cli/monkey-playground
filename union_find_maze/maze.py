@@ -55,53 +55,55 @@ def find_next_steps(currect_index):
     return next_steps
 
 
-# ------------------------------------------------------------------------
-# start from the start of the maze and look for the next connection
-currect_index = 0  # index in the data array
-# while the start and end of the maze are not connected
-# try to find the next connected item of the path
-steps = []
-while(not connected(data, 0, size-1)):
-    # for currect cell get all surrounding coordinates
-    # from these coordinates randomly select one as the next step,
-    # but with the condition that this coordinate is not connected to the currect cell and is not a "WALL"
+def run_union_find(onNextStep = None):
 
-    # for every loop save the steps
-    steps.append(currect_index)
+    # ------------------------------------------------------------------------
+    # start from the start of the maze and look for the next connection
+    currect_index = 0  # index in the data array
+    # while the start and end of the maze are not connected
+    # try to find the next connected item of the path
+    steps = []
+    while(not connected(data, 0, size-1)):
+        # for currect cell get all surrounding coordinates
+        # from these coordinates randomly select one as the next step,
+        # but with the condition that this coordinate is not connected to the currect cell and is not a "WALL"
 
-    next_steps = find_next_steps(currect_index)
+        # for every loop save the steps
+        steps.append(currect_index)
 
-    if len(next_steps) == 0:
-        """
-        Dead end reached. Need to get back and look at previous connections next steps.
-        """
-        print("Dead end at index:", currect_index,
-              "and coordinate:", hashTable[currect_index])
-        prev_step = steps.index(currect_index) - 1
-        while(prev_step >= 0 and len(find_next_steps(steps[prev_step])) == 0):
-            # go check for a new route starting from one step before the current one
-            # loop until a node with possible next steps to be folowed
-            prev_step -= 1
-        if (prev_step >= 0):
-            print("Loogin for new route at index", steps[prev_step])
-            currect_index = steps[prev_step]
-            continue
-        else:
-            print("Could not find a route from start to end... :(")
-        break
+        next_steps = find_next_steps(currect_index)
 
-    # get a random item from the array
-    next_index = next_steps[randrange(len(next_steps))]
-    union(data, currect_index, next_index)
-    print("Iteration at index", currect_index)
-    # prepare for next loop
-    currect_index = next_index
+        if len(next_steps) == 0:
+            """
+            Dead end reached. Need to get back and look at previous connections next steps.
+            """
+            print("Dead end at index:", currect_index,
+                  "and coordinate:", hashTable[currect_index])
+            prev_step = steps.index(currect_index) - 1
+            while(prev_step >= 0 and len(find_next_steps(steps[prev_step])) == 0):
+                # go check for a new route starting from one step before the current one
+                # loop until a node with possible next steps to be folowed
+                prev_step -= 1
+            if (prev_step >= 0):
+                print("Loogin for new route at index", steps[prev_step])
+                currect_index = steps[prev_step]
+                continue
+            else:
+                print("Could not find a route from start to end... :(")
+            break
 
-print("Iteration at last index", size-1)
-print("--------------------------------------------------------")
-# append last index of the array
-steps.append(size-1)
+        # get a random item from the array
+        next_index = next_steps[randrange(len(next_steps))]
+        union(data, currect_index, next_index)
+        print("Iteration at index", currect_index)
+        # prepare for next loop
+        currect_index = next_index
 
-step_coordinates = list(map(lambda item: hashTable[item], steps))
-print("Iteration traversed the following coordinates:")
-print(step_coordinates)
+    print("Iteration at last index", size-1)
+    print("--------------------------------------------------------")
+    # append last index of the array
+    steps.append(size-1)
+
+    step_coordinates = list(map(lambda item: hashTable[item], steps))
+    print("Iteration traversed the following coordinates:")
+    print(step_coordinates)
