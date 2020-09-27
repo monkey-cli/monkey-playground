@@ -107,7 +107,7 @@ def construct_maze(maze_template):
 
 
 # ---------------------------------------------------------------
-maze = construct_maze(maze20x20)
+maze = construct_maze(maze10x10)
 
 
 def get_maze():
