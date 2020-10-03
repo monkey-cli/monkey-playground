@@ -1,28 +1,39 @@
-
 import numpy as np
 from union_find import union, find, connected
 
 
 def get_surroundings(matrix, coord):
     """
-    Get surrounding coordinates only if their indexes are part of the matrix 
+    Get surrounding coordinates only if their indexes are part of the matrix
     """
     width = np.shape(matrix)[0]
     height = np.shape(matrix)[1]
     coordinates = []
 
     # top
-    (coordinates.append((coord[0], coord[1]-1))
-     if coord[1] - 1 >= 0 else None)
+    (
+        coordinates.append((coord[0], coord[1] - 1))
+        if coord[1] - 1 >= 0
+        else None
+    )
     # bottom
-    (coordinates.append((coord[0], coord[1]+1))
-     if coord[1] + 1 < height else None)
+    (
+        coordinates.append((coord[0], coord[1] + 1))
+        if coord[1] + 1 < height
+        else None
+    )
     # left
-    (coordinates.append((coord[0]-1, coord[1]))
-     if coord[0] - 1 >= 0 else None)
+    (
+        coordinates.append((coord[0] - 1, coord[1]))
+        if coord[0] - 1 >= 0
+        else None
+    )
     # right
-    (coordinates.append((coord[0]+1, coord[1]))
-     if coord[0] + 1 < width else None)
+    (
+        coordinates.append((coord[0] + 1, coord[1]))
+        if coord[0] + 1 < width
+        else None
+    )
 
     return coordinates
 
@@ -43,7 +54,7 @@ def get_possible_next_steps(matrix, hashTable, coordinate):
     filtered_surroundings = []
     for coord in surroundings_coordinates:
         item = matrix[coord[0]][coord[1]]
-        if(item is 0):
+        if item == 0:
             filtered_surroundings.append(coord)
 
     indexes = find_indexes_of_cords(filtered_surroundings, hashTable)
@@ -53,6 +64,6 @@ def get_possible_next_steps(matrix, hashTable, coordinate):
 def get_non_connected_next_steps(data, currentStep, possible_next_steps):
     next_steps = []
     for step in possible_next_steps:
-        if(not connected(data, currentStep, step)):
+        if not connected(data, currentStep, step):
             next_steps.append(step)
     return next_steps

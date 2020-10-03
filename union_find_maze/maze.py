@@ -4,6 +4,7 @@ from random import randrange
 from union_find import union, find, connected
 from utils import get_possible_next_steps, get_non_connected_next_steps
 from mock import get_maze
+
 """
 Task: Try to find the route in the provided maze from origin (0,0) to destination (N-1,M-1).
 N-number of rows, M-number of columns.
@@ -25,7 +26,7 @@ columns = np.shape(maze)[1]
 # The number of elements in this union find
 size = rows * columns
 
-if (size <= 0):
+if size <= 0:
     raise Exception("Size <= 0 is not allowed")
 
 # Step 1
@@ -51,12 +52,14 @@ def find_next_steps(currect_index):
     matrixCoord = hashTable[currect_index]
     possible_next_steps = get_possible_next_steps(maze, hashTable, matrixCoord)
     next_steps = get_non_connected_next_steps(
-        data, currect_index, possible_next_steps)
+        data, currect_index, possible_next_steps
+    )
 
     return next_steps
 
 
 # ------------------------------------------------------------------------
+
 
 def run_union_find(onStepUpdate=None):
     # start from the start of the maze and look for the next connection
@@ -64,7 +67,7 @@ def run_union_find(onStepUpdate=None):
     # while the start and end of the maze are not connected
     # try to find the next connected item of the path
     steps = []
-    while(not connected(data, 0, size-1)):
+    while not connected(data, 0, size - 1):
         # for currect cell get all surrounding coordinates
         # from these coordinates randomly select one as the next step,
         # but with the condition that this coordinate is not connected to the currect cell and is not a "WALL"
@@ -78,21 +81,24 @@ def run_union_find(onStepUpdate=None):
             """
             Dead end reached. Need to get back and look at previous connections next steps.
             """
-            print("Dead end at index:", currect_index,
-                  "and coordinate:", hashTable[currect_index])
+            print(
+                "Dead end at index:",
+                currect_index,
+                "and coordinate:",
+                hashTable[currect_index],
+            )
             if onStepUpdate:
                 onStepUpdate(
-                    {
-                        "status": "DEAD_END",
-                        "value": hashTable[currect_index]
-                    }
+                    {"status": "DEAD_END", "value": hashTable[currect_index]}
                 )
             prev_step = steps.index(currect_index) - 1
-            while(prev_step >= 0 and len(find_next_steps(steps[prev_step])) == 0):
+            while (
+                prev_step >= 0 and len(find_next_steps(steps[prev_step])) == 0
+            ):
                 # go check for a new route starting from one step before the current one
                 # loop until a node with possible next steps to be folowed
                 prev_step -= 1
-            if (prev_step >= 0):
+            if prev_step >= 0:
                 print("Loogin for new route at index", steps[prev_step])
                 currect_index = steps[prev_step]
                 continue
@@ -106,18 +112,15 @@ def run_union_find(onStepUpdate=None):
         print("Iteration at index", currect_index)
         if onStepUpdate:
             onStepUpdate(
-                {
-                    "status": "NEXT_STEP",
-                    "value": hashTable[currect_index]
-                }
+                {"status": "NEXT_STEP", "value": hashTable[currect_index]}
             )
         # prepare for next loop
         currect_index = next_index
 
-    print("Iteration at last index", size-1)
+    print("Iteration at last index", size - 1)
     print("--------------------------------------------------------")
     # append last index of the array
-    steps.append(size-1)
+    steps.append(size - 1)
 
     step_coordinates = list(map(lambda item: hashTable[item], steps))
     print("Iteration traversed the following coordinates:")
