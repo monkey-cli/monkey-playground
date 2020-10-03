@@ -100,7 +100,7 @@ maze10x10 = [
 def construct_maze(maze_template):
     temp_maze = []
     for row in maze_template:
-        valid_row = row[1: len(row)-1]  # remove 1st and last item
+        valid_row = row[1 : len(row) - 1]  # remove 1st and last item
         split_row = [int(x) for x in valid_row]
         temp_maze.append(split_row)
     return temp_maze
